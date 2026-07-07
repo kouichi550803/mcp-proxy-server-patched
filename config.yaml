@@ -1,0 +1,40 @@
+name: "MCP Proxy Server (Patched)"
+version: "0.4.1-kouichi.2"
+slug: "mcp_proxy_kouichi"
+url: https://github.com/kouichi550803/mcp-proxy-server-patched
+description: "このaddonはadamwattis系ではなくptbsare/mcp-proxy-server(0.4.1)ベース。上流の既知不具合を自前修正済み: (1)SSEバックエンドへのツール呼び出しの度に無条件で再接続していた挙動を、実際にエラーが起きた時だけ再接続するよう変更。 (2) onclose/onerrorが発火しないケースでクライアント側transportが際限なく溨まり続ける問題に対し、30分アイドルのtransportを5分毎に強制クローズする仕組みを追加。(3)リトライ前の再接続処理がSSEのみ対象でhttp(bitbank等)にはなかったため、httpも同じ再接続ロジックの対象に拡張。ビルドはローカルソースから(imageの直接pullはしない)。"
+arch:
+  - amd64
+  - aarch64
+init: false
+hassio_api: true
+hassio_role: default
+homeassistant_api: false
+host_network: true
+map:
+  - type: addon_config
+    read_only: False
+    path: /mcp-proxy-server/config
+  - type: share
+    read_only: False
+options:
+  port: 3673
+  enable_admin_ui: true
+  admin_username: "admin"
+  admin_password: "password"
+  tools_folder: "/share/mcp_tools_patched"
+  mcp_proxy_sse_allowed_keys: ""
+schema:
+  port: int(1024,65535)
+  enable_admin_ui: bool
+  admin_username: str
+  admin_password: password
+  tools_folder: str
+  allowed_keys: str?
+  allowed_tokens: str?
+startup: application
+boot: auto
+webui: "http://[HOST]:[PORT:3673]/admin"
+ingress: false
+panel_icon: "mdi:server-network-outline"
+panel_title: "MCP Proxy Server (Patched)"

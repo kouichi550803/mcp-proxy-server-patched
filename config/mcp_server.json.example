@@ -1,0 +1,29 @@
+{
+  "mcpServers": {
+    "bitbank": {
+      "type": "http",
+      "active": true,
+      "url": "http://local-bitbank-mcp-server-v4:8787"
+    },
+    "filesystem": {
+      "type": "sse",
+      "active": true,
+      "url": "http://local-mcp-filesystem:8001/sse"
+    },
+    "shell": {
+      "type": "sse",
+      "active": true,
+      "url": "http://local-mcp-shell:8004/sse"
+    },
+    "playwright": {
+      "type": "sse",
+      "active": true,
+      "url": "http://local-mcp-playwright:8002/sse"
+    },
+    "github": {
+      "type": "sse",
+      "active": true,
+      "url": "http://local-mcp-github:8003/sse"
+    }
+  }
+}
